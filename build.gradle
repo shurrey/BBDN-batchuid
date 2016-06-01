@@ -1,0 +1,42 @@
+apply plugin:'java' // applies the java plugin
+apply plugin:'maven'
+apply plugin:'war'
+apply plugin:'eclipse'
+
+// define the version for the project when publishing to maven
+group "blackboard.plugin"
+version "1.0.0"
+
+project.ext {
+  learnVersion = "3000.1.0-rel.52"
+  deployServer = "localhost:9876"
+}
+
+repositories{
+
+    mavenCentral() // Use 'maven central' for resolving your thirdparty dependencies.
+                   // you can declare any maven/ivy/file repository to resolve your thirdparty dependencies
+    maven {
+		url "https://maven.blackboard.com/content/repositories/releases"
+    } 
+}
+
+configurations {
+  buildUtils
+}
+
+dependencies{
+  providedCompile( "blackboard.platform:bb-platform:$ext.learnVersion" ) { transitive = false }
+  providedCompile( "blackboard.platform:bb-taglibs:$ext.learnVersion" ) { transitive = false }
+  buildUtils "org.oscelot:b2deploy-task:0.1.0"
+}
+
+
+// Add a task to deploy a B2 using starting block
+task deployB2( dependsOn: "war" ) << {
+      ant.taskdef( name: "b2deploy", classname: "org.oscelot.ant.B2DeployTask", classpath: project.configurations.buildUtils.asPath )
+      ant.b2deploy( localfilepath: project.war.archivePath, host: $ext.deployServer, courseorgavailable: 'true', clean: 'true' )
+}
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.6'
+}

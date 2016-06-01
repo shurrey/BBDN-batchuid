@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry kind="lib" path="/Users/shurrey/.gradle/caches/artifacts-24/filestore/blackboard.platform/bb-platform/3000.1.0-rel.52/jar/949225b6b859a417b488c61bede8d9ae758dd8b9/bb-platform-3000.1.0-rel.52.jar" exported="true"/>
+	<classpathentry kind="lib" path="/Users/shurrey/Documents/workspace/testSpace/BBDN-batchuid/unresolved dependency - blackboard.platform bb-taglib 3000.1.0-rel.52" exported="true"/>
+</classpath>
